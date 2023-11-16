@@ -101,7 +101,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff81e8d10d8873f4584f29018cd42bf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  moveSpeed: 5
+  JumpForce: 8
+  isGrounded: 1
+  isAttacking: 0
 --- !u!61 &8519724238135737487
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -162,7 +165,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 3
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
