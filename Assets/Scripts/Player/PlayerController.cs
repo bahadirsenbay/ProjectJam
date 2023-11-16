@@ -11,7 +11,6 @@ public class CharacterMovements : MonoBehaviour
     bool facingRight;
     public float JumpForce;
     public bool isGrounded;
-    public bool isAttacking = false;
 
 
     void Start()
