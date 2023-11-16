@@ -15,9 +15,7 @@ public class CharacterMovements : MonoBehaviour
 
     void Start()
     {
-
-
-
+        PlayerPrefs.DeleteAll();
         moveHorizontal = Input.GetAxisRaw("Horizontal");
         rb2d = GetComponent<Rigidbody2D>();
     }
