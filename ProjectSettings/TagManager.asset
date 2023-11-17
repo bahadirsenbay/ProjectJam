@@ -6,14 +6,15 @@ TagManager:
   tags:
   - Grounded
   - Wall
+  - Ground
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
-  - 
+  - Wall
   - 
   - 
   - 

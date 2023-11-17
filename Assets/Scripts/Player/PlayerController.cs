@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class CharacterMovements : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     public float moveSpeed;
     private Rigidbody2D rb2d;
@@ -11,7 +11,6 @@ public class CharacterMovements : MonoBehaviour
     bool facingRight;
     public float JumpForce;
     public bool isGrounded;
-
 
     void Start()
     {
@@ -24,7 +23,7 @@ public class CharacterMovements : MonoBehaviour
     {
         CharacterMove();
         CharacterAnimation();
-        CharacterJump();
+        //CharacterJump();
 
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -39,7 +38,9 @@ public class CharacterMovements : MonoBehaviour
 
             }
         }
+
     }
+
 
     void CharacterMove()
     {

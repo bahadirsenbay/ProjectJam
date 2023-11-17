@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &196234220 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6188598137723272345, guid: 95fd14e91ee368349a55df37a3ffaf84, type: 3}
+  m_PrefabInstance: {fileID: 1626918484}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &438423243
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -134,6 +139,10 @@ PrefabInstance:
     - target: {fileID: 2051429534436418103, guid: c5c1c47181b5c874cb68e0237dbfbc6a, type: 3}
       propertyPath: m_Name
       value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 2051429534436418103, guid: c5c1c47181b5c874cb68e0237dbfbc6a, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2051429534436418103, guid: c5c1c47181b5c874cb68e0237dbfbc6a, type: 3}
       propertyPath: m_TagString
@@ -608,6 +617,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7013295178611578393, guid: 95fd14e91ee368349a55df37a3ffaf84, type: 3}
+      propertyPath: wallCheck
+      value: 
+      objectReference: {fileID: 196234220}
     - target: {fileID: 7809614005979935952, guid: 95fd14e91ee368349a55df37a3ffaf84, type: 3}
       propertyPath: m_Name
       value: Character
