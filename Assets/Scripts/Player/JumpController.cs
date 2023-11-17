@@ -17,11 +17,18 @@ public class JumpController : MonoBehaviour
     public LayerMask groundLayer;
     Vector2 vecGravity;
 
-    [Header("Wall Jump System")]
+    [Header("Wall Sliding System")]
     public Transform wallCheck;
+    public LayerMask wallLayer;
     [SerializeField] bool isWallTouch;
     [SerializeField] bool isSliding;
     public float wallSlidingSpeed;
+
+    [Header("Wall Sliding System")]
+    public float wallJumpDuration;
+    public Vector2 wallJumpForce;
+    [SerializeField] bool wallJumping;
+
 
     bool isJumping;
     float jumpCounter;
@@ -75,7 +82,7 @@ public class JumpController : MonoBehaviour
             }
         }
 
-        isWallTouch = Physics2D.OverlapCapsule(wallCheck.position, new Vector2(0.15f, 1f), CapsuleDirection2D.Horizontal, 0, groundLayer);
+        isWallTouch = Physics2D.OverlapCapsule(wallCheck.position, new Vector2(0.15f, 1f), CapsuleDirection2D.Horizontal, 0, wallLayer);
 
         if (isWallTouch && !isGrounded() && horizontal != 0)
         {
@@ -84,6 +91,22 @@ public class JumpController : MonoBehaviour
         else
         {
             isSliding = false;
+
+        }
+
+        if (isSliding)
+        {
+            wallJumping = true;
+            Invoke("StopWallJump", wallJumpDuration);
+        }
+
+        if (wallJumping)
+        {
+
+        }
+        else
+        {
+
         }
 
     }
@@ -99,6 +122,11 @@ public class JumpController : MonoBehaviour
     bool isGrounded()
     {
         return Physics2D.OverlapCapsule(groundCheck.position, new Vector2(1.1f, 0.06f), CapsuleDirection2D.Horizontal, 0, groundLayer);
+    }
+
+    private void StopWallJump()
+    {
+        wallJumping = false;
     }
 
 }

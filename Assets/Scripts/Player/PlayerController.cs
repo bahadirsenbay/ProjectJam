@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,35 +13,53 @@ public class PlayerController : MonoBehaviour
     public float JumpForce;
     public bool isGrounded;
 
+    bool triggered = false;
+    [SerializeField] public bool keepMachine;
+
     void Start()
     {
         PlayerPrefs.DeleteAll();
         moveHorizontal = Input.GetAxisRaw("Horizontal");
         rb2d = GetComponent<Rigidbody2D>();
+
+
+
+        if (keepMachine != true)
+        {
+            keepMachine = true; 
+        }
     }
 
     void Update()
     {
         CharacterMove();
         CharacterAnimation();
-        //CharacterJump();
 
-        if (Input.GetKeyDown(KeyCode.E))
+
+        if (keepMachine)
         {
-            if (SceneManager.GetActiveScene().name == "DayMap")
+            if (Input.GetKeyDown(KeyCode.E))
             {
-                SceneManager.LoadScene("NightMap");
+                if (SceneManager.GetActiveScene().name == "DayMap")
+                {
+                    SceneManager.LoadScene("NightMap");
 
-            }
-            else
-            {
-                SceneManager.LoadScene("DayMap");
+                }
+                else
+                {
+                    SceneManager.LoadScene("DayMap");
 
+                }
             }
         }
-
+        
     }
 
+    public void InteractWithMachine()
+    {
+        keepMachine = true;
+        Debug.Log("Machine is kept.");
+    }
 
     void CharacterMove()
     {
@@ -68,43 +87,6 @@ public class PlayerController : MonoBehaviour
         Vector3 Scaler = transform.localScale;
         Scaler.x *= -1;
         transform.localScale = Scaler;
-    }
-
-    void CharacterJump()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-
-            if (isGrounded)
-            {
-                rb2d.velocity = Vector2.up * JumpForce;
-            }
-
-        }
-    }
-
-    private void OnCollisionEnter2D(Collision2D col)
-    {
-        if (col.gameObject.tag == "Grounded")
-        {
-            isGrounded = true;
-        }
-    }
-
-    private void OnCollisionStay2D(Collision2D col)
-    {
-        if (col.gameObject.tag == "Grounded")
-        {
-            isGrounded = true;
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D col)
-    {
-        if (col.gameObject.tag == "Grounded")
-        {
-            isGrounded = false;
-        }
     }
 
 

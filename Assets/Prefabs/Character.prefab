@@ -286,6 +286,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   wallCheck: {fileID: 6188598137723272345}
-  isWallTouch: 1
+  isWallTouch: 0
   isSliding: 0
   wallSlidingSpeed: 2
