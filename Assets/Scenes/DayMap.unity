@@ -223,7 +223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 519420028}
-  ParallaxEf: 0.2
+  ParallaxEf: 0.03
   offset: 5
 --- !u!1 &72356845
 GameObject:
@@ -325,7 +325,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 519420028}
-  ParallaxEf: 0.3
+  ParallaxEf: 0.05
   offset: 5
 --- !u!1 &74843561
 GameObject:
@@ -1918,7 +1918,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8824187261456433102, guid: c5c1c47181b5c874cb68e0237dbfbc6a, type: 3}
       propertyPath: m_LocalScale.x
-      value: 24.16805
+      value: 9.533163
       objectReference: {fileID: 0}
     - target: {fileID: 8824187261456433102, guid: c5c1c47181b5c874cb68e0237dbfbc6a, type: 3}
       propertyPath: m_LocalScale.y
@@ -1930,7 +1930,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8824187261456433102, guid: c5c1c47181b5c874cb68e0237dbfbc6a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -8.57
+      value: -2.1
       objectReference: {fileID: 0}
     - target: {fileID: 8824187261456433102, guid: c5c1c47181b5c874cb68e0237dbfbc6a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1977,6 +1977,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1930910111243711245, guid: 95fd14e91ee368349a55df37a3ffaf84, type: 3}
+      propertyPath: m_Time
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2323505091808594276, guid: 95fd14e91ee368349a55df37a3ffaf84, type: 3}
       propertyPath: m_Mass
       value: 1
@@ -2070,12 +2074,24 @@ PrefabInstance:
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7260926941717586944, guid: 95fd14e91ee368349a55df37a3ffaf84, type: 3}
+      propertyPath: moveSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7260926941717586944, guid: 95fd14e91ee368349a55df37a3ffaf84, type: 3}
       propertyPath: isGrounded
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7260926941717586944, guid: 95fd14e91ee368349a55df37a3ffaf84, type: 3}
+      propertyPath: dashingTime
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7260926941717586944, guid: 95fd14e91ee368349a55df37a3ffaf84, type: 3}
       propertyPath: airMoveSpeed
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7260926941717586944, guid: 95fd14e91ee368349a55df37a3ffaf84, type: 3}
+      propertyPath: dashingPower
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7260926941717586944, guid: 95fd14e91ee368349a55df37a3ffaf84, type: 3}
       propertyPath: wallSlideSpeed
@@ -2320,7 +2336,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 519420028}
-  ParallaxEf: 0.1
+  ParallaxEf: 0.01
   offset: 5
 --- !u!1 &1364793226
 GameObject:
@@ -2464,11 +2480,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8824187261456433102, guid: c5c1c47181b5c874cb68e0237dbfbc6a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -15.55
+      value: -7.84
       objectReference: {fileID: 0}
     - target: {fileID: 8824187261456433102, guid: c5c1c47181b5c874cb68e0237dbfbc6a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.6
+      value: 1.84
       objectReference: {fileID: 0}
     - target: {fileID: 8824187261456433102, guid: c5c1c47181b5c874cb68e0237dbfbc6a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2791,7 +2807,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 519420028}
-  ParallaxEf: 0.4
+  ParallaxEf: 0.07
   offset: 5
 --- !u!1 &1451921995
 GameObject:

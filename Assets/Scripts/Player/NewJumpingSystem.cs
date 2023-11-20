@@ -6,14 +6,13 @@ public class NewJumpingSystem : MonoBehaviour
 {
     Rigidbody2D rb;
     Animator animator;
-
+    private TrailRenderer trailRenderer;
     [Header("Movement")]
     [SerializeField] float moveSpeed = 10f;
     [SerializeField] float airMoveSpeed = 30f;
     private float XDirectionalInput;
     private bool facingRight = true;
     private bool isMoving;
-
 
     [Header("Jumping System")]
     [SerializeField] float jumpForce;
@@ -36,10 +35,19 @@ public class NewJumpingSystem : MonoBehaviour
     [SerializeField] float wallJumpDirection = -1f;
     [SerializeField] Vector2 wallJumpAngle;
 
+    [Header("Dashing System")]
+    [SerializeField] private float dashingVelocity = 14f;
+    [SerializeField] private float dashingTime = 0.5f;
+    private Vector2 dashingDir;
+    [SerializeField] bool isDashing;
+    [SerializeField] bool canDash = true;
+
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        trailRenderer = GetComponent<TrailRenderer>();
         wallJumpAngle.Normalize();
     }
 
@@ -47,8 +55,43 @@ public class NewJumpingSystem : MonoBehaviour
     {
         Inputs();
         CheckWorld();
+
+
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
+        {
+            isDashing = true;
+            canDash = false;
+            trailRenderer.emitting = true;
+            float orginalGravity = rb.gravityScale;
+            rb.gravityScale = 0f;
+            dashingDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            if (dashingDir == Vector2.zero)
+            {
+                dashingDir = new Vector2(transform.localScale.x, 0);
+            }
+            StartCoroutine(StopDashing(orginalGravity));
+        }
+
+        if (isDashing)
+        {
+            rb.velocity = dashingDir.normalized * dashingVelocity;
+            return;
+        }
+
+        if (isGrounded || isWallSliding)
+        {
+            canDash = true;
+        }
+
     }
 
+    private IEnumerator StopDashing(float orginalGravity)
+    {
+        yield return new WaitForSeconds(dashingTime);
+        rb.gravityScale = orginalGravity;
+        trailRenderer.emitting = false;
+        isDashing = false;
+    }
     private void FixedUpdate()
     {
         Movement();
@@ -93,7 +136,7 @@ public class NewJumpingSystem : MonoBehaviour
         {
             rb.velocity = new Vector2(XDirectionalInput * moveSpeed, rb.velocity.y);
         }
-        else if (!isGrounded && !isWallSliding && XDirectionalInput != 0)
+        else if (!isGrounded && !isWallSliding && !isDashing && XDirectionalInput != 0)
         {
             rb.AddForce(new Vector2(airMoveSpeed * XDirectionalInput, 0));
             if (Mathf.Abs(rb.velocity.x) > moveSpeed)
@@ -132,6 +175,16 @@ public class NewJumpingSystem : MonoBehaviour
         }
     }
 
+    private void WallJump()
+    {
+        if ((isWallSliding || isTouchingWall) && canJump)
+        {
+            rb.AddForce(new Vector2(wallJumpForce * wallJumpDirection * wallJumpAngle.x, wallJumpForce * wallJumpAngle.y), ForceMode2D.Impulse);
+            canJump = false;
+
+        }
+    }
+
     private void WallSlide()
     {
         if (isTouchingWall && !isGrounded && rb.velocity.y < 0)
@@ -152,15 +205,7 @@ public class NewJumpingSystem : MonoBehaviour
 
     }
 
-    private void WallJump()
-    {
-        if ((isWallSliding || isTouchingWall) && canJump)
-        {
-            rb.AddForce(new Vector2(wallJumpForce * wallJumpDirection * wallJumpAngle.x, wallJumpForce * wallJumpAngle.y), ForceMode2D.Impulse);
-            canJump = false;
 
-        }
-    }
 
     void AnimationControl()
     {
