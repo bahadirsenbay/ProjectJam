@@ -2091,7 +2091,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7260926941717586944, guid: 95fd14e91ee368349a55df37a3ffaf84, type: 3}
       propertyPath: airMoveSpeed
-      value: 15
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 7260926941717586944, guid: 95fd14e91ee368349a55df37a3ffaf84, type: 3}
       propertyPath: dashingPower

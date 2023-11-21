@@ -72,10 +72,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7870287590053960992}
   - component: {fileID: 3730959815518717299}
-  - component: {fileID: 7013295178611578393}
   - component: {fileID: 8519724238135737487}
   - component: {fileID: 2323505091808594276}
-  - component: {fileID: 3498988071705250162}
   - component: {fileID: 8750854785316434645}
   - component: {fileID: 7260926941717586944}
   - component: {fileID: 1930910111243711245}
@@ -155,22 +153,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7013295178611578393
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7809614005979935952}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff81e8d10d8873f4584f29018cd42bf7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
-  JumpForce: 8
-  isGrounded: 1
-  keepMachine: 0
 --- !u!61 &8519724238135737487
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -243,36 +225,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &3498988071705250162
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7809614005979935952}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b77142e27b423ec458db995997923a20, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jumpTime: 0.4
-  jumpPower: 11
-  fallMultiplier: 5
-  jumpMultiplier: 3
-  groundCheck: {fileID: 134752551463337156}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  wallCheck: {fileID: 6188598137723272345}
-  wallLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  isWallTouch: 0
-  isSliding: 0
-  wallSlidingSpeed: 2
-  wallJumpDuration: 0
-  wallJumpForce: {x: 0, y: 0}
-  wallJumping: 0
 --- !u!95 &8750854785316434645
 Animator:
   serializedVersion: 5
