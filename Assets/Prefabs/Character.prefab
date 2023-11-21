@@ -324,13 +324,14 @@ MonoBehaviour:
   wallCheckSize: {x: 0.05, y: 0.8}
   isTouchingWall: 1
   isWallSliding: 0
-  wallJumpForce: 18
+  wallJumpForce: 5
   wallJumpDirection: -1
-  wallJumpAngle: {x: 1, y: 3}
+  wallJumpAngle: {x: 1, y: 0.5}
   dashingVelocity: 14
   dashingTime: 0.2
   isDashing: 0
   canDash: 0
+  doubleJump: 0
 --- !u!96 &1930910111243711245
 TrailRenderer:
   serializedVersion: 3

@@ -33,7 +33,7 @@ public class NewJumpingSystem : MonoBehaviour
     [Header("Wall Jump System")]
     [SerializeField] float wallJumpForce = 18f;
     [SerializeField] float wallJumpDirection = -1f;
-    [SerializeField] Vector2 wallJumpAngle;
+    [SerializeField] public Vector2 wallJumpAngle;
 
     [Header("Dashing System")]
     [SerializeField] private float dashingVelocity = 14f;
@@ -42,6 +42,7 @@ public class NewJumpingSystem : MonoBehaviour
     [SerializeField] bool isDashing;
     [SerializeField] bool canDash = true;
 
+    [SerializeField] bool doubleJump;
 
     private void Start()
     {
@@ -80,7 +81,11 @@ public class NewJumpingSystem : MonoBehaviour
 
         if (isGrounded || isWallSliding)
         {
+            canJump = true;
             canDash = true;
+        }else if (!isGrounded || !isWallSliding)
+        {
+            canJump = false;
         }
 
     }
@@ -95,21 +100,17 @@ public class NewJumpingSystem : MonoBehaviour
     private void FixedUpdate()
     {
         Movement();
-        Jump();
         WallSlide();
-        WallJump();
         AnimationControl();
     }
     private void Inputs()
     {
         XDirectionalInput = Input.GetAxisRaw("Horizontal");
-        if (isGrounded || isWallSliding)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                canJump = true;
-            }
+            Jump();
         }
+
 
     }
 
@@ -168,22 +169,24 @@ public class NewJumpingSystem : MonoBehaviour
 
     private void Jump()
     {
-        if (canJump && isGrounded)
+        if (canJump)
         {
+            doubleJump = true;
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            canJump = false;
         }
-    }
+        else if (doubleJump)
+        {
+            doubleJump = false;
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        }
 
-    private void WallJump()
-    {
         if ((isWallSliding || isTouchingWall) && canJump)
         {
             rb.AddForce(new Vector2(wallJumpForce * wallJumpDirection * wallJumpAngle.x, wallJumpForce * wallJumpAngle.y), ForceMode2D.Impulse);
             canJump = false;
-
         }
     }
+
 
     private void WallSlide()
     {
