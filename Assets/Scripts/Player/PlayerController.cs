@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Vector2 groundCheckSize;
     [SerializeField] private bool isGrounded;
     [SerializeField] private bool canJump;
+    [SerializeField] bool doubleJump;
 
     [Header("Wall Sliding System")]
     [SerializeField] float wallSlideSpeed = 0;
@@ -43,7 +44,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] bool isDashing;
     [SerializeField] bool canDash = true;
 
-    [SerializeField] bool doubleJump;
+    [Header("Ladder System")]
+    private float vertical;
+    [SerializeField] bool isLadder;
+    [SerializeField] bool isClimbing;
+
 
     private void Start()
     {
@@ -57,7 +62,7 @@ public class PlayerController : MonoBehaviour
     {
         Inputs();
         CheckWorld();
-
+        climbStairs();
 
         if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
         {
@@ -103,10 +108,21 @@ public class PlayerController : MonoBehaviour
         Movement();
         WallSlide();
         AnimationControl();
+
+        if (isClimbing)
+        {
+            rb.gravityScale = 0f;
+            rb.velocity = new Vector2(rb.velocity.x, vertical * moveSpeed);
+        }
+        else
+        {
+            rb.gravityScale = 4f;
+        }
     }
     private void Inputs()
     {
         XDirectionalInput = Input.GetAxisRaw("Horizontal");
+        vertical = Input.GetAxisRaw("Vertical");
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Jump();
@@ -178,7 +194,7 @@ public class PlayerController : MonoBehaviour
         else if (doubleJump)
         {
             doubleJump = false;
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce*0.7f);
         }
 
         if ((isWallSliding || isTouchingWall) && canJump)
@@ -207,6 +223,32 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, wallSlideSpeed);
         }
 
+    }
+
+    private void climbStairs()
+    {
+        if (isLadder && Mathf.Abs(vertical) > 0f)
+        {
+            isClimbing = true;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Ladder"))
+        {
+            Debug.Log("Merdiven");
+            isLadder = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Ladder"))
+        {
+            isLadder = false;
+            isClimbing = false;
+        }
     }
 
 
