@@ -150,7 +150,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //this is for movement
-        if (isGrounded)
+        if (isGrounded && !StartCutScene.isCutsceneOn)
         {
             rb.velocity = new Vector2(XDirectionalInput * moveSpeed, rb.velocity.y);
         }
